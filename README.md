@@ -1,2 +1,2 @@
 # CalculatorApp
-A basic app to learn android programming principles
+A basic app written in Kotlin to learn android programming principles
