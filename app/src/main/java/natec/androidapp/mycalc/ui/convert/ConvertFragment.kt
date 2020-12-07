@@ -1,4 +1,4 @@
-package natec.androidapp.mycalc.ui.home
+package natec.androidapp.mycalc.ui.convert
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,18 +11,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import natec.androidapp.mycalc.R
 
-class HomeFragment : Fragment() {
+class ConvertFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var convertViewModel: ConvertViewModel
     private var numberAdd = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        convertViewModel = ViewModelProvider(this).get(ConvertViewModel::class.java)
 
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = view.findViewById(R.id.text_home)
+        val view = inflater.inflate(R.layout.fragment_convert, container, false)
+        val textView: TextView = view.findViewById(R.id.text_convert)
 
-        homeViewModel.liveHomeText.observe(viewLifecycleOwner, Observer {
+        convertViewModel.liveHomeText.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
 
@@ -36,8 +36,8 @@ class HomeFragment : Fragment() {
         val buttonSub = view.findViewById<Button>(R.id.buttonSub)
         val buttonChangeText = view.findViewById<Button>(R.id.setText)
 
-        buttonAdd.setOnClickListener { homeViewModel.addOne() }
-        buttonSub.setOnClickListener { homeViewModel.subOne() }
-        buttonChangeText.setOnClickListener { homeViewModel.changeText() }
+        buttonAdd.setOnClickListener { convertViewModel.addOne() }
+        buttonSub.setOnClickListener { convertViewModel.subOne() }
+        buttonChangeText.setOnClickListener { convertViewModel.changeText() }
     }
 }
