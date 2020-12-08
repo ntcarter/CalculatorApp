@@ -10,26 +10,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import natec.androidapp.mycalc.R
+import natec.androidapp.mycalc.databinding.FragmentConvertBinding
 
 class ConvertFragment : Fragment() {
+
+    //a view's lifecycle in a fragment is different than the fragments lifecycle
+    //the fragment can exist while its views don't so we need to set the viewbinding to null
+    private var _binding: FragmentConvertBinding? = null
+    //_binding can be null and we don't want to handle nullability everywhere we use _binding
+    private val binding get() = _binding!!
 
     private lateinit var convertViewModel: ConvertViewModel
     private var numberAdd = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         convertViewModel = ViewModelProvider(this).get(ConvertViewModel::class.java)
-
-        val view = inflater.inflate(R.layout.fragment_convert, container, false)
-        val textView: TextView = view.findViewById(R.id.text_convert)
+        _binding = FragmentConvertBinding.inflate(inflater, container, false)
 
         convertViewModel.liveHomeText.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            binding.textConvert.text = it
         })
 
-        initButtons(view)
-        return view
+        initButtons(binding.root)
+        return binding.root
     }
-
 
     private fun initButtons(view: View){
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
@@ -39,5 +43,10 @@ class ConvertFragment : Fragment() {
         buttonAdd.setOnClickListener { convertViewModel.addOne() }
         buttonSub.setOnClickListener { convertViewModel.subOne() }
         buttonChangeText.setOnClickListener { convertViewModel.changeText() }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

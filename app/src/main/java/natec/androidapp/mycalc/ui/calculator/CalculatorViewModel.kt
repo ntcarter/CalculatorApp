@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 
 class CalculatorViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Convert Fragment"
-    }
-    val text: LiveData<String> = _text
+    //create a mutableLiveData which can be manipulated from this class
+    private val calculatorText = MutableLiveData("This is the calculator")
+    val liveHomeText: LiveData<String>
+        get() = calculatorText
+
+
 }
