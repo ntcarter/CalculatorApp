@@ -17,11 +17,6 @@ class CalculatorViewModel : ViewModel() {
     val input: LiveData<String>
         get() = _input
 
-    //temporary init for testing TODO "remove this later"
-    init {
-        _input.value = "this is a string"
-    }
-
     fun numberPressed(num: String){
         if(_input.value != null){
             _input.value = _input.value + num
