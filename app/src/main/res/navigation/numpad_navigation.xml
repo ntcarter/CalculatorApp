@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/numpad_navigation"
+    app:startDestination="@id/numpadFragment">
+
+    <fragment
+        android:id="@+id/numpadFragment"
+        android:name="natec.androidapp.mycalc.ui.calculator.pads.NumpadFragment"
+        android:label="fragment_numpad"
+        tools:layout="@layout/fragment_numpad" >
+        <action
+            android:id="@+id/action_numpadFragment_to_specialPad"
+            app:destination="@id/specialPad" />
+        <action
+            android:id="@+id/action_numpadFragment_to_secondarySpecialPadFragment"
+            app:destination="@id/secondarySpecialPadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/specialPad"
+        android:name="natec.androidapp.mycalc.ui.calculator.pads.SpecialPadFragment"
+        android:label="fragment_special_pad"
+        tools:layout="@layout/fragment_special_pad" >
+        <action
+            android:id="@+id/action_specialPad_to_numpadFragment"
+            app:destination="@id/numpadFragment" />
+        <action
+            android:id="@+id/action_specialPad_to_secondarySpecialPadFragment"
+            app:destination="@id/secondarySpecialPadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondarySpecialPadFragment"
+        android:name="natec.androidapp.mycalc.ui.calculator.pads.SecondaryPadFragment"
+        android:label="fragment_secondary_special_pad"
+        tools:layout="@layout/fragment_secondary_pad" >
+        <action
+            android:id="@+id/action_secondarySpecialPadFragment_to_numpadFragment"
+            app:destination="@id/numpadFragment" />
+        <action
+            android:id="@+id/action_secondarySpecialPadFragment_to_specialPad"
+            app:destination="@id/specialPad" />
+    </fragment>
+</navigation>

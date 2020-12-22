@@ -32,4 +32,8 @@
     <string name="decimal">.</string>
     <string name="_4">4</string>
     <string name="_5">5</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="secondary">secondary</string>
+    <string name="special">special</string>
 </resources>

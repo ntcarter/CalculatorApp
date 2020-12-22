@@ -4,12 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import natec.androidapp.mycalc.R
 import natec.androidapp.mycalc.databinding.FragmentConvertBinding
 
 class ConvertFragment : Fragment() {
@@ -23,26 +19,23 @@ class ConvertFragment : Fragment() {
     private lateinit var convertViewModel: ConvertViewModel
     private var numberAdd = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         convertViewModel = ViewModelProvider(this).get(ConvertViewModel::class.java)
         _binding = FragmentConvertBinding.inflate(inflater, container, false)
 
-        convertViewModel.liveHomeText.observe(viewLifecycleOwner, Observer {
+        convertViewModel.liveHomeText.observe(viewLifecycleOwner, {
             binding.textConvert.text = it
         })
 
-        initButtons(binding.root)
+        initButtons()
         return binding.root
     }
 
-    private fun initButtons(view: View){
-        val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
-        val buttonSub = view.findViewById<Button>(R.id.buttonSub)
-        val buttonChangeText = view.findViewById<Button>(R.id.setText)
-
-        buttonAdd.setOnClickListener { convertViewModel.addOne() }
-        buttonSub.setOnClickListener { convertViewModel.subOne() }
-        buttonChangeText.setOnClickListener { convertViewModel.changeText() }
+    private fun initButtons(){
+        //uses the viewBinding to get the button and set the onClick
+        binding.buttonAdd.setOnClickListener { convertViewModel.addOne() }
+        binding.buttonSub.setOnClickListener { convertViewModel.subOne() }
+        binding.setText.setOnClickListener { convertViewModel.changeText() }
     }
 
     override fun onDestroyView() {
