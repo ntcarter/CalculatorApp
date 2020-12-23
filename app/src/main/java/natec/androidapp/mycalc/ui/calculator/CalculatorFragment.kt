@@ -21,7 +21,10 @@ class CalculatorFragment : Fragment() {
     private lateinit var calculatorViewModel: CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        calculatorViewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
+
+        //multiple fragments share the same instance of the calculatorViewModel
+        // so scope the viewModel to the activity hosting all of the fragments.
+        calculatorViewModel = ViewModelProvider(requireActivity()).get(CalculatorViewModel::class.java)
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
 
         calculatorViewModel.input.observe(viewLifecycleOwner, {

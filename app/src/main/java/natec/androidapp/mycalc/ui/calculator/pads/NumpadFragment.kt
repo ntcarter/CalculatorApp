@@ -21,8 +21,9 @@ class NumpadFragment : Fragment() {
 
         binding = FragmentNumpadBinding.inflate(inflater, container, false)
 
-        //this viewmodel needs to be the same instance of the viewmodel that CalculatorFragment uses
-        viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
+        //multiple fragments share the same instance of the calculatorViewModel
+        // so scope the viewModel to the activity hosting all of the fragments.
+        viewModel = ViewModelProvider(requireActivity()).get(CalculatorViewModel::class.java)
 
         //initialize calculator buttons
         initButtons()
