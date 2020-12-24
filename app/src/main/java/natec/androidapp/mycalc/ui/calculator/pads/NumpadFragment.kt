@@ -31,8 +31,12 @@ class NumpadFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * initializes and attaches listeners to each of the buttons in this fragment
+     */
     private fun initButtons(){
-
+        //TODO("when an invalid String is evaluated there should be a message popping up telling the user")
+        //TODO("limit the amount of digits they can put into one group of digits, and the amount of operations that can be chained together.")
         //Buttons to navigate from this fragment to another one
         binding.btnMainToSpecial.setOnClickListener {
             it.findNavController().navigate(NumpadFragmentDirections.actionNumpadFragmentToSpecialPad())
@@ -40,74 +44,82 @@ class NumpadFragment : Fragment() {
         binding.btnMainToSecondary.setOnClickListener {
             it.findNavController().navigate(NumpadFragmentDirections.actionNumpadFragmentToSecondarySpecialPadFragment())
         }
-        //number buttons
+
+        //digit buttons
         binding.btnNum0.setOnClickListener {
-            viewModel.numberPressed("0")
+            viewModel.addDigitToInput("0")
         }
         binding.btnNum1.setOnClickListener {
-            viewModel.numberPressed("1")
+            viewModel.addDigitToInput("1")
         }
         binding.btnNum2.setOnClickListener {
-            viewModel.numberPressed("2")
+            viewModel.addDigitToInput("2")
         }
         binding.btnNum3.setOnClickListener {
-            viewModel.numberPressed("3")
+            viewModel.addDigitToInput("3")
         }
         binding.btnNum4.setOnClickListener {
-            viewModel.numberPressed("4")
+            viewModel.addDigitToInput("4")
         }
         binding.btnNum5.setOnClickListener {
-            viewModel.numberPressed("5")
+            viewModel.addDigitToInput("5")
         }
         binding.btnNum6.setOnClickListener {
-            viewModel.numberPressed("6")
+            viewModel.addDigitToInput("6")
         }
         binding.btnNum7.setOnClickListener {
-            viewModel.numberPressed("7")
+            viewModel.addDigitToInput("7")
         }
         binding.btnNum8.setOnClickListener {
-            viewModel.numberPressed("8")
+            viewModel.addDigitToInput("8")
         }
         binding.btnNum9.setOnClickListener {
-            viewModel.numberPressed("9")
+            viewModel.addDigitToInput("9")
         }
 
         //operations
+        //TODO("If an operation is pressed and the last thing pressed was an operation this pressed operation should replace what is there")
         binding.btnAddition.setOnClickListener {
-
+            viewModel.addOperationToInput("+")
         }
         binding.btnNeg.setOnClickListener {
-
+            viewModel.negateRecentNumber()
         }
         binding.btnMainEquals.setOnClickListener {
-
+            viewModel.evaluate()
         }
         binding.btnDecimal.setOnClickListener {
-
+            viewModel.addOperationToInput(".")
         }
         binding.btnSubtract.setOnClickListener {
-
+            viewModel.addOperationToInput("-")
         }
         binding.btnMultiply.setOnClickListener {
-
+            viewModel.addOperationToInput("*")
         }
         binding.btnDivide.setOnClickListener {
-
+            viewModel.addOperationToInput("/")
         }
         binding.btnPar.setOnClickListener {
-
+            //TODO("special case (handle this in the viewmodel: if _input is null add one ( if it isnt add a X(, count all left PAR to match with right PAR")
+            //TODO("only certain operations (+ and  -) should be valid after a left parenthesis")
         }
         binding.btnPercent.setOnClickListener {
-
+            viewModel.addOperationToInput("%")
+            //TODO("If a digit is pressed after then a X should be added for multiplication")
+            //TODO("if this operation is entered after a digit it should eval to digit / 100")
+            //TODO("when combod with different operations it does different thinngs")
+            //when with X: 19.99x7% = 19.99x0.07
+            //when with +: 19.99+7% = 19.99+(19.99*0.07)
         }
         binding.btnClear.setOnClickListener {
-
+            viewModel.clearInput()
         }
         binding.btnMainDelete.setOnClickListener {
-
+            viewModel.deleteLast()
         }
 
-        //memory
+        //memory TODO
         binding.btnMc.setOnClickListener {
 
         }
