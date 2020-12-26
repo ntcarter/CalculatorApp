@@ -35,7 +35,6 @@ class NumpadFragment : Fragment() {
      * initializes and attaches listeners to each of the buttons in this fragment
      */
     private fun initButtons(){
-        //TODO("when an invalid String is evaluated there should be a message popping up telling the user")
         //TODO("limit the amount of digits they can put into one group of digits, and the amount of operations that can be chained together.")
         //Buttons to navigate from this fragment to another one
         binding.btnMainToSpecial.setOnClickListener {
@@ -78,7 +77,6 @@ class NumpadFragment : Fragment() {
         }
 
         //operations
-        //TODO("If an operation is pressed and the last thing pressed was an operation this pressed operation should replace what is there")
         binding.btnAddition.setOnClickListener {
             viewModel.addOperationToInput("+")
         }

@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.calculator.CalculatorFragment">
 
-    <TextView
+    <EditText
         android:id="@+id/text_calc_output"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="textEnd"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:inputType="numberSigned|numberDecimal"
+        android:minLines="2"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_for_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <fragment
         android:id="@+id/calcpad_nav_host"
@@ -39,6 +44,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_for_buttons"
-        app:navGraph= "@navigation/numpad_navigation"/>
+        app:navGraph="@navigation/numpad_navigation" />
+
+    <EditText
+        android:id="@+id/text_preview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:inputType="numberSigned|numberDecimal"
+        android:textAlignment="textEnd"
+        android:textColor="@color/material_on_background_emphasis_medium"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_for_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_calc_output"
+        app:layout_constraintVertical_bias="0.7"
+        tools:text="Preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

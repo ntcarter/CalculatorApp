@@ -28,8 +28,16 @@ class CalculatorFragment : Fragment() {
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
 
         calculatorViewModel.input.observe(viewLifecycleOwner, {
-            binding.textCalcOutput.text = it
+            binding.textCalcOutput.setText(it)
+            if(it.isNotEmpty()){
+                binding.textCalcOutput.setSelection(it.length)
+            }
         })
+
+        calculatorViewModel.preview.observe(viewLifecycleOwner, {
+            binding.textPreview.setText(it)
+        })
+
         return binding.root
     }
 }
