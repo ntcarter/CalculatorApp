@@ -101,6 +101,7 @@ class NumpadFragment : Fragment() {
         binding.btnPar.setOnClickListener {
             //TODO("special case (handle this in the viewmodel: if _input is null add one ( if it isnt add a X(, count all left PAR to match with right PAR")
             //TODO("only certain operations (+ and  -) should be valid after a left parenthesis")
+            viewModel.addParentheses()
         }
         binding.btnPercent.setOnClickListener {
             viewModel.addOperationToInput("%")

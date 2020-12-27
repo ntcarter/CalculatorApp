@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udojava.evalex.Expression
+import natec.androidapp.mycalc.insert
 import java.lang.ArithmeticException
 import java.lang.NumberFormatException
 
@@ -20,6 +21,7 @@ import java.lang.NumberFormatException
  */
 private const val TAG = "CalculatorViewModel"
 
+//TODO("move calculator logic to its own class to de-clutter viewmodel")
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
 
     // need live data variable for the display that changes as the user provides input
@@ -43,8 +45,11 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     //should not exceed 20
     private var numDigitsInARow = 0
 
-    //var to track number of operations in one expression. should not exceed 10
+    //tracks the number of operations in one expression. can not exceed 10
     private var totalOperations = 0
+
+    //keeps track of the number of open left parentheses. at 0 there are equal left and right parentheses
+    private var numOpenLeftPar = 0
 
     // makes sure that _input.value isn't null when the first button is pressed
     init {
@@ -72,7 +77,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             }
         }else{
             Toast.makeText(getApplication(), "Max 20 digits allowed for a number", Toast.LENGTH_SHORT).show()
-            //TODO("Move out of viewmodel to activity")
+            //TODO("Move toast out of viewModel to activity")
         }
     }
 
@@ -95,7 +100,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             evaluateForPreview()
         } else {
             Toast.makeText(getApplication(), "Max 10 operations allowed in an expression", Toast.LENGTH_SHORT).show()
-            //TODO("Move out of viewmodel to activity")
+            //TODO("Move toast out of viewModel to activity")
         }
     }
 
@@ -109,22 +114,62 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         _preview.value = ""
         numDigitsInARow = 0
         totalOperations = 0
+        numOpenLeftPar = 0
     }
 
     /**
      * Searches from the end of _input finding the most recent non-digit character and
      * negates that value Ex) 5+5 becomes 5+(-5...
+     * Negations will always lead with (-
      */
     fun negateRecentNumber() {
-        val input = _input.value
+        //special conditions when the input is empty
+        if(_input.value!!.isEmpty()){
+            Log.d(TAG, "empty value")
+            _input.value = "(-"
+            numOpenLeftPar++
+            return
+        } else if(_input.value == "(-"){
+            _input.value = ""
+            numOpenLeftPar--
+            return
+        }
 
-        if (input != null) {
-            for(i in input.length -1 downTo 0){
-                if (!(input[i].isDigit())){
-                    Log.d(TAG, "Value: ${input[i]}")
-                }
+        val index = findFirstOperation(_input.value!!)
+        //if index is a - check thing to the left if possible. If it is a ( we need to negate
+        if(_input.value!![index] == '-' && index > 0){
+            if(_input.value!![index - 1] == '('){
+                _input.value = _input.value!!.replaceRange(index - 1, index + 1, "")
+                numOpenLeftPar--
+                return
             }
         }
+
+        Log.d(TAG, "first index: ${_input.value}")
+        //if index is 0 we insert negation before the index, if > 0 after the index
+        if(index == 0){
+            _input.value = _input.value!!.insert(index, "(-")
+            numOpenLeftPar++
+        }else{
+            //all other cases index > 0
+            _input.value = _input.value!!.insert(index +1, "(-")
+            numOpenLeftPar++
+        }
+    }
+
+    /**
+     * Finds and returns the index of the first operation from the end of the string if it exists
+     */
+    private fun findFirstOperation(expression: String): Int{
+            for(i in expression.length -1 downTo 0){
+                if (!(expression[i].isDigit())){
+                    //decimals aren't considered an operation
+                    if(expression[i] != '.'){
+                        return i
+                    }
+                }
+            }
+        return 0
     }
 
     /**
@@ -137,6 +182,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             isResult = true
             numDigitsInARow = 0
             totalOperations = 0
+            numOpenLeftPar = 0
         } catch (e: Expression.ExpressionException) {
             //TODO("Remove toast from view model, change viewmodel extension back")
             Toast.makeText(getApplication(), "Invalid expression", Toast.LENGTH_SHORT).show()
@@ -174,13 +220,49 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
      */
     fun deleteLast() {
         if (_input.value!!.isNotEmpty()) {
-            if(_input.value!![_input.value!!.length -1].isDigit()){
-                numDigitsInARow--
-            }else{
-                totalOperations--
+            when(_input.value!![_input.value!!.length - 1 ]){
+                '0','1','2','3','4','5','6','7','8','9',-> numDigitsInARow--
+                '+','-','*','/' -> totalOperations--
+                '(' -> numOpenLeftPar--
+                ')' -> numOpenLeftPar++
             }
             _input.value = _input.value!!.subSequence(0, _input.value!!.length - 1).toString()
         }
         evaluateForPreview()
+    }
+
+    /**
+     * adds a left or right Parenthesis
+     */
+    fun addParentheses(){
+        //special cases
+        if(_input.value == ""){
+            _input.value = "("
+            numOpenLeftPar++
+            Log.d(TAG, "Input Empty adding (")
+            return
+        }
+
+        //The parenthesis added depends on the last char in _input.value and the value of numOpenLeftPar
+        if(_input.value!!.isNotEmpty()){
+            if(_input.value!![_input.value!!.length - 1] == '(' || numOpenLeftPar == 0){
+                _input.value = _input.value + "("
+                numOpenLeftPar++
+                Log.d(TAG, "Adding (")
+            }else if(numOpenLeftPar > 0){
+                _input.value = _input.value + ")"
+                Log.d(TAG, "Adding )")
+                numOpenLeftPar--
+            }
+        }
+
+        //if we type a parenthesis the input should not be treated as a result
+        if(isResult){
+            isResult = false
+        }
+
+        if(numOpenLeftPar == 0){
+            evaluateForPreview()
+        }
     }
 }
