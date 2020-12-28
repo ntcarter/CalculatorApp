@@ -1,5 +1,6 @@
 package natec.androidapp.mycalc.ui.calculator
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,13 @@ class CalculatorFragment : Fragment() {
         // so scope the viewModel to the activity hosting all of the fragments.
         calculatorViewModel = ViewModelProvider(requireActivity()).get(CalculatorViewModel::class.java)
         _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
+
+        //disable keyboard pop-up
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            binding.textCalcOutput.showSoftInputOnFocus = false
+        }else{
+            binding.textCalcOutput.setTextIsSelectable(true)
+        }
 
         calculatorViewModel.input.observe(viewLifecycleOwner, {
             binding.textCalcOutput.setText(it)

@@ -67,6 +67,14 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
                 _input.value = ""
                 isResult = false
             }
+
+            //if the last char of _input is a ) we want to add a * when adding a digit
+            if(_input.value!!.length > 1){
+                if (getLastChar() == ')'){
+                    _input.value = _input.value + '*'
+                }
+            }
+
             _input.value = _input.value + input
             isOperationDisable = false
             numDigitsInARow++
@@ -75,8 +83,9 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             if (_input.value!!.length > 1) {
                 evaluateForPreview()
             }
-        }else{
-            Toast.makeText(getApplication(), "Max 20 digits allowed for a number", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(getApplication(), "Max 20 digits allowed for a number",
+                Toast.LENGTH_SHORT).show()
             //TODO("Move toast out of viewModel to activity")
         }
     }
@@ -99,7 +108,8 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             numDigitsInARow = 0
             evaluateForPreview()
         } else {
-            Toast.makeText(getApplication(), "Max 10 operations allowed in an expression", Toast.LENGTH_SHORT).show()
+            Toast.makeText(getApplication(), "Max 10 operations allowed in an expression",
+                Toast.LENGTH_SHORT).show()
             //TODO("Move toast out of viewModel to activity")
         }
     }
@@ -111,6 +121,9 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         _input.value = ""
         // disable operation input after clearing for the first input value
         isOperationDisable = true
+
+        //reset various calculator states
+        isResult = false
         _preview.value = ""
         numDigitsInARow = 0
         totalOperations = 0
@@ -124,51 +137,69 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
      */
     fun negateRecentNumber() {
         //special conditions when the input is empty
-        if(_input.value!!.isEmpty()){
+        if (_input.value!!.isEmpty()) {
             Log.d(TAG, "empty value")
             _input.value = "(-"
             numOpenLeftPar++
             return
-        } else if(_input.value == "(-"){
+        } else if (_input.value == "(-") {
             _input.value = ""
             numOpenLeftPar--
             return
         }
 
         val index = findFirstOperation(_input.value!!)
-        //if index is a - check thing to the left if possible. If it is a ( we need to negate
-        if(_input.value!![index] == '-' && index > 0){
-            if(_input.value!![index - 1] == '('){
+
+        // if index is a - check thing to the left. If it is a ( we need to negate
+        if (_input.value!![index] == '-' && index > 0) {
+            if (_input.value!![index - 1] == '(') {
                 _input.value = _input.value!!.replaceRange(index - 1, index + 1, "")
                 numOpenLeftPar--
                 return
             }
+         // our value is already negative in the format -25 remove the -
+         // This can only happen with a result for this calc implementation so index will be 0
+        }else if(_input.value!![index] == '-' && index == 0){
+            _input.value = _input.value!!.replaceRange(index, index + 1, "")
+            return
         }
 
-        Log.d(TAG, "first index: ${_input.value}")
+        //replace a ( with (-
+        if(_input.value!![index] == '('){
+            _input.value = _input.value!!.replaceRange(index, index + 1, "(-")
+            return
+        }
+
         //if index is 0 we insert negation before the index, if > 0 after the index
-        if(index == 0){
+        if (index == 0) {
             _input.value = _input.value!!.insert(index, "(-")
             numOpenLeftPar++
-        }else{
+        } else {
             //all other cases index > 0
-            _input.value = _input.value!!.insert(index +1, "(-")
+            _input.value = _input.value!!.insert(index + 1, "(-")
             numOpenLeftPar++
         }
     }
 
     /**
      * Finds and returns the index of the first operation from the end of the string if it exists
+     * this function is used for finding an index to insert at for negation
      */
-    private fun findFirstOperation(expression: String): Int{
-            for(i in expression.length -1 downTo 0){
-                if (!(expression[i].isDigit())){
-                    //decimals aren't considered an operation
-                    if(expression[i] != '.'){
-                        return i
-                    }
+    private fun findFirstOperation(expression: String): Int {
+        //if expression is 0 or 1 character we return the 0th index
+        if (expression.length <= 1) {
+            return 0
+        }
+
+        //all expressions in this loop have length >= 2
+        for (i in expression.length - 1 downTo 0) {
+            if (!(expression[i].isDigit())) {
+                //these conditions aren't considered an operation
+                if (expression[i] != '.' && !(expression[i]== '+' && expression[i - 1] == 'E') && expression[i] != 'E') {
+                    return i
                 }
             }
+        }
         return 0
     }
 
@@ -186,11 +217,11 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         } catch (e: Expression.ExpressionException) {
             //TODO("Remove toast from view model, change viewmodel extension back")
             Toast.makeText(getApplication(), "Invalid expression", Toast.LENGTH_SHORT).show()
-        }catch (e: ArithmeticException){
+        } catch (e: ArithmeticException) {
             Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-        }catch(e: NumberFormatException){
-            Toast.makeText(getApplication(),"Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            deleteLast()
+        } catch (e: NumberFormatException) {
+            Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            deleteAtCursor(_input.value!!.length - 1)
         }
         //clear the preview
         _preview.value = ""
@@ -205,28 +236,37 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             _preview.value = expression.eval().toString()
         } catch (e: Expression.ExpressionException) {
             _preview.value = ""
-        }catch (e: ArithmeticException){
-           //Toast.makeText(getApplication(),"Error: ${e.message}", Toast.LENGTH_SHORT).show()
-        }catch(e: NumberFormatException){
-            Toast.makeText(getApplication(),"Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        } catch (e: ArithmeticException) {
+            //Toast.makeText(getApplication(),"Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        } catch (e: NumberFormatException) {
+            Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             //the last thing input caused an error so delete it
             isOperationDisable = false
-            deleteLast()
+            deleteAtCursor(_input.value!!.length - 1)
         }
     }
 
     /**
      * Removes the last typed character from _input
      */
-    fun deleteLast() {
-        if (_input.value!!.isNotEmpty()) {
-            when(_input.value!![_input.value!!.length - 1 ]){
-                '0','1','2','3','4','5','6','7','8','9',-> numDigitsInARow--
-                '+','-','*','/' -> totalOperations--
+    fun deleteAtCursor(selectionStart: Int?) {
+        if(selectionStart == null || selectionStart == 0){
+            Log.d(TAG, "selectionStart is null")
+            return
+        }
+
+        if (_input.value!!.isNotEmpty()){
+            //change calc state for thing we are going to delete
+            when (_input.value!![selectionStart - 1]) {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> numDigitsInARow--
+                '+', '-', '*', '/' -> totalOperations--
                 '(' -> numOpenLeftPar--
                 ')' -> numOpenLeftPar++
             }
-            _input.value = _input.value!!.subSequence(0, _input.value!!.length - 1).toString()
+
+            //removes the thing before the cursor from the input
+            _input.value = _input.value!!.subSequence(0, selectionStart -1).toString() +
+                    _input.value!!.subSequence(selectionStart, _input.value!!.length).toString()
         }
         evaluateForPreview()
     }
@@ -234,35 +274,42 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     /**
      * adds a left or right Parenthesis
      */
-    fun addParentheses(){
+    fun addParentheses() {
         //special cases
-        if(_input.value == ""){
+        if (_input.value == "") {
             _input.value = "("
             numOpenLeftPar++
+            isOperationDisable = false
             Log.d(TAG, "Input Empty adding (")
             return
         }
 
         //The parenthesis added depends on the last char in _input.value and the value of numOpenLeftPar
-        if(_input.value!!.isNotEmpty()){
-            if(_input.value!![_input.value!!.length - 1] == '(' || numOpenLeftPar == 0){
+        if (_input.value!!.isNotEmpty()) {
+            if (getLastChar() == '(' || numOpenLeftPar == 0) {
                 _input.value = _input.value + "("
                 numOpenLeftPar++
-                Log.d(TAG, "Adding (")
-            }else if(numOpenLeftPar > 0){
+            } else if (numOpenLeftPar > 0) {
                 _input.value = _input.value + ")"
-                Log.d(TAG, "Adding )")
                 numOpenLeftPar--
             }
         }
 
         //if we type a parenthesis the input should not be treated as a result
-        if(isResult){
+        if (isResult) {
             isResult = false
         }
 
-        if(numOpenLeftPar == 0){
+        if (numOpenLeftPar == 0) {
             evaluateForPreview()
         }
+    }
+
+    /**
+     * helper to get the last char of _input.
+     * Caller is responsible for making sure _input has >=1 chars
+     */
+    private fun getLastChar(): Char{
+        return _input.value!![_input.value!!.length - 1]
     }
 }

@@ -484,7 +484,7 @@
         android:insetTop="0.5dp"
         android:insetRight="0.5dp"
         android:insetBottom="0.5dp"
-        android:text="@string/percent"
+        android:text="@string/modulo"
         app:cornerRadius="-100dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_num_7"
         app:layout_constraintEnd_toStartOf="@+id/btn_par"
