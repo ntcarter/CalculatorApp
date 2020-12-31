@@ -9,25 +9,19 @@
     <string name="parentheses">()</string>
     <string name="delete">Delete</string>
     <string name="_8">8</string>
-    <string name="memory_plus">M+</string>
-    <string name="modulo">Modulo</string>
+    <string name="modulo">Modulo (%)</string>
     <string name="_6">6</string>
     <string name="minus">-</string>
     <string name="divide">/</string>
     <string name="multiply">X</string>
-    <string name="mr">MR</string>
     <string name="equals">=</string>
     <string name="_2">2</string>
     <string name="_1">1</string>
     <string name="_9">9</string>
     <string name="_7">7</string>
-    <string name="memory_Minus">M-</string>
-    <string name="other2">Other2</string>
     <string name="_3">3</string>
     <string name="plus">+</string>
     <string name="negate">+/-</string>
-    <string name="memory_clear">MC</string>
-    <string name="other1">Other1</string>
     <string name="_0">0</string>
     <string name="decimal">.</string>
     <string name="_4">4</string>

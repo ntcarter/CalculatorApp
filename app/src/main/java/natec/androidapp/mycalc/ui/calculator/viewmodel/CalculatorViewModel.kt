@@ -51,33 +51,44 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     //keeps track of the number of open left parentheses. at 0 there are equal left and right parentheses
     private var numOpenLeftPar = 0
 
+    // Tracks the cursor position for inserting and deleting.
+    // CHANGE CURSOR POSITION BEFORE UPDATING _input.value, then compensate when accessing _input.value
+    var cursorPosition: Int = 0
+
     // makes sure that _input.value isn't null when the first button is pressed
     init {
         _input.value = ""
     }
 
     /**
-     * Adds the user input digit to the evaluation string _input
+     * Adds the user input digit to the evaluation string _input at the cursor's current position
      */
     fun addDigitToInput(input: String) {
         if (numDigitsInARow < 20) {
             // if the value stored in a input is a result of an operation being evaluated and is not an operation
             // we are ready to begin a new operation
             if (isResult) {
+                cursorPosition = 0
                 _input.value = ""
                 isResult = false
             }
 
             //if the last char of _input is a ) we want to add a * when adding a digit
-            if(_input.value!!.length > 1){
-                if (getLastChar() == ')'){
-                    _input.value = _input.value + '*'
-                }
+            if (getCharBeforeCursor() == ')'){
+                cursorPosition++
+                _input.value = _input.value!!.insert(cursorPosition - 1, "*")
+                Log.d(TAG, ") check: $cursorPosition")
             }
 
-            _input.value = _input.value + input
+
+            // need to set the cursor position before calling insert
+            // due to the liveData observer updating the position of the cursor
+            cursorPosition++
+            _input.value = _input.value!!.insert(cursorPosition - 1, input)
+
             isOperationDisable = false
             numDigitsInARow++
+            Log.d(TAG, "cursorposition after insert: $cursorPosition")
 
             //update the preview
             if (_input.value!!.length > 1) {
@@ -91,19 +102,26 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * Adds the user input operation to the evaluation string _input
+     * Adds the user input operation to the evaluation string _input at the cursor's current position
      */
     fun addOperationToInput(input: String) {
+        //TODO("account for cursorposition")
         if (totalOperations < 10) {
             if (!(isOperationDisable)) {
-                _input.value = _input.value + input
+                //update cursorPosition before insert due to liveData updating on insert
+                cursorPosition++
+                _input.value = _input.value!!.insert(cursorPosition -1, input)
                 totalOperations++
                 isOperationDisable = true
             } else if (isOperationDisable && _input.value!!.isNotEmpty()) {
-                //get the last character which is an operation and replace it with this operation
-                _input.value = _input.value!!.substring(0, _input.value!!.length - 1)
-                _input.value = _input.value + input
+                //the the operation before the cursor and replace it with this operation
+                Log.d(TAG,"cursorposition: $cursorPosition")
+                Log.d(TAG,"length: ${_input.value!!.length}")
+                _input.value!!.subSequence(0, cursorPosition - 1).toString() +
+                        _input.value!!.subSequence(cursorPosition , _input.value!!.length).toString()
+                _input.value = _input.value!!.insert(cursorPosition, input)
             }
+
             isResult = false
             numDigitsInARow = 0
             evaluateForPreview()
@@ -128,6 +146,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         numDigitsInARow = 0
         totalOperations = 0
         numOpenLeftPar = 0
+        cursorPosition = 0
     }
 
     /**
@@ -136,6 +155,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
      * Negations will always lead with (-
      */
     fun negateRecentNumber() {
+        //TODO(instead of starting from the end, start from cursor position)
         //special conditions when the input is empty
         if (_input.value!!.isEmpty()) {
             Log.d(TAG, "empty value")
@@ -214,6 +234,9 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             numDigitsInARow = 0
             totalOperations = 0
             numOpenLeftPar = 0
+            cursorPosition = 0
+            //clear the preview
+            _preview.value = ""
         } catch (e: Expression.ExpressionException) {
             //TODO("Remove toast from view model, change viewmodel extension back")
             Toast.makeText(getApplication(), "Invalid expression", Toast.LENGTH_SHORT).show()
@@ -221,10 +244,8 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
         } catch (e: NumberFormatException) {
             Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            deleteAtCursor(_input.value!!.length - 1)
+            deleteAtCursor()
         }
-        //clear the preview
-        _preview.value = ""
     }
 
     /**
@@ -242,39 +263,15 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             //the last thing input caused an error so delete it
             isOperationDisable = false
-            deleteAtCursor(_input.value!!.length - 1)
+            deleteAtCursor()
         }
-    }
-
-    /**
-     * Removes the last typed character from _input
-     */
-    fun deleteAtCursor(selectionStart: Int?) {
-        if(selectionStart == null || selectionStart == 0){
-            Log.d(TAG, "selectionStart is null")
-            return
-        }
-
-        if (_input.value!!.isNotEmpty()){
-            //change calc state for thing we are going to delete
-            when (_input.value!![selectionStart - 1]) {
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> numDigitsInARow--
-                '+', '-', '*', '/' -> totalOperations--
-                '(' -> numOpenLeftPar--
-                ')' -> numOpenLeftPar++
-            }
-
-            //removes the thing before the cursor from the input
-            _input.value = _input.value!!.subSequence(0, selectionStart -1).toString() +
-                    _input.value!!.subSequence(selectionStart, _input.value!!.length).toString()
-        }
-        evaluateForPreview()
     }
 
     /**
      * adds a left or right Parenthesis
      */
     fun addParentheses() {
+        //TODO("account for cursorposition")
         //special cases
         if (_input.value == "") {
             _input.value = "("
@@ -286,7 +283,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
 
         //The parenthesis added depends on the last char in _input.value and the value of numOpenLeftPar
         if (_input.value!!.isNotEmpty()) {
-            if (getLastChar() == '(' || numOpenLeftPar == 0) {
+            if (getCharBeforeCursor() == '(' || numOpenLeftPar == 0) {
                 _input.value = _input.value + "("
                 numOpenLeftPar++
             } else if (numOpenLeftPar > 0) {
@@ -306,10 +303,41 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * helper to get the last char of _input.
-     * Caller is responsible for making sure _input has >=1 chars
+     * Removes character at the cursors position
      */
-    private fun getLastChar(): Char{
-        return _input.value!![_input.value!!.length - 1]
+    fun deleteAtCursor() {
+        if(cursorPosition == 0){
+            return
+        }
+
+        if (_input.value!!.isNotEmpty()){
+            //change calc state for thing we are going to delete
+            when (_input.value!![cursorPosition - 1]) {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> numDigitsInARow--
+                '+', '-', '*', '/' -> totalOperations--
+                '(' -> numOpenLeftPar--
+                ')' -> numOpenLeftPar++
+            }
+
+            // decrement cursorposition before changing the liveData
+            cursorPosition--
+            //removes the thing before the cursor from the input
+            _input.value = _input.value!!.subSequence(0, cursorPosition).toString() +
+                    _input.value!!.subSequence(cursorPosition + 1, _input.value!!.length).toString()
+
+        }
+
+        evaluateForPreview()
+    }
+
+    /**
+     * helper to get the last char of _input.
+     */
+    private fun getCharBeforeCursor(): Char?{
+        if(_input.value?.length!! <= 1 || cursorPosition == 0){
+            return null
+        }
+
+        return _input.value!![cursorPosition - 1]
     }
 }

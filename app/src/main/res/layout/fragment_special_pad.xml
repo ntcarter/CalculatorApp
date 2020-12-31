@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_2_power_x"
         app:layout_constraintTop_toBottomOf="@+id/btn_x_power_y"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_cube_root"
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_square_root"
         app:layout_constraintTop_toBottomOf="@+id/btn_2_power_x"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_square_root"
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_10_power_x"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_x_power_3"
@@ -76,7 +76,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_e"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_factorial"
@@ -94,7 +94,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_square_root"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_10_power_x"
@@ -112,7 +112,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_x_power_3"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_2_power_x"
@@ -130,7 +130,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_10_power_x"
         app:layout_constraintTop_toBottomOf="@+id/btn_x_power_2"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_special_rad_deg"
@@ -148,7 +148,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_e_power_x"
         app:layout_constraintTop_toBottomOf="@+id/btn_special_delete"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_y_root_x"
@@ -166,7 +166,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_cube_root"
         app:layout_constraintTop_toBottomOf="@+id/btn_one_over_x"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_e"
@@ -184,7 +184,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_special_to_main"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_pi"
@@ -202,7 +202,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_absolute_val"
         app:layout_constraintTop_toBottomOf="@+id/btn_y_root_x"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_e_power_x"
@@ -220,7 +220,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_e"
         app:layout_constraintTop_toBottomOf="@+id/btn_special_to_secondary"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_x_power_2"
@@ -238,7 +238,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_x_power_3"
         app:layout_constraintTop_toBottomOf="@+id/btn_e_power_x"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_absolute_val"
@@ -256,7 +256,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_factorial"
         app:layout_constraintTop_toBottomOf="@+id/btn_cube_root"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_x_power_y"
@@ -274,7 +274,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_x_power_2"
         app:layout_constraintTop_toBottomOf="@+id/btn_special_rad_deg"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_special_delete"
@@ -292,7 +292,7 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_special_to_secondary"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_special_to_secondary"
@@ -310,7 +310,7 @@
         app:layout_constraintHorizontal_weight="37.5"
         app:layout_constraintStart_toEndOf="@+id/btn_special_to_main"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_special_to_main"
@@ -328,7 +328,7 @@
         app:layout_constraintHorizontal_weight="37.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_special_equals"
@@ -344,6 +344,6 @@
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_one_over_x"
         app:layout_constraintTop_toBottomOf="@+id/btn_special_delete"
-        app:layout_constraintVertical_weight="85.72" />
+        app:layout_constraintVertical_weight="83.33" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

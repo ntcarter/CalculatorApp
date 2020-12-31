@@ -19,10 +19,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_tan"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_equals"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_cosh"
         app:layout_constraintTop_toBottomOf="@+id/btn_tan"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_cos"
@@ -37,10 +39,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_cosh"
         app:layout_constraintEnd_toStartOf="@+id/btn_inverse_tan"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_inverse_sin"
         app:layout_constraintTop_toBottomOf="@+id/btn_cosh"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_sin"
@@ -55,10 +59,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_sinh"
         app:layout_constraintEnd_toStartOf="@+id/btn_inverse_cos"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sinh"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_sin"
@@ -73,10 +79,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_sinh"
         app:layout_constraintEnd_toStartOf="@+id/btn_cos"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_log"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_sinh"
@@ -91,10 +99,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_inverse_cosh"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_inverse_sin"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_sinh"
@@ -109,10 +119,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_sin"
         app:layout_constraintEnd_toStartOf="@+id/btn_cosh"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sin"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_cosh"
@@ -127,10 +139,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_cos"
         app:layout_constraintEnd_toStartOf="@+id/btn_tanh"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_sinh"
         app:layout_constraintTop_toBottomOf="@+id/btn_cos"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_secondary_rad_deg"
@@ -145,10 +159,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_tan"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_equals"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_ln"
         app:layout_constraintTop_toBottomOf="@+id/btn_secondary_delete"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_tan"
@@ -163,10 +179,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_inverse_tanh"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_equals"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_inverse_cos"
         app:layout_constraintTop_toBottomOf="@+id/btn_tanh"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_log"
@@ -181,10 +199,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_sin"
         app:layout_constraintEnd_toStartOf="@+id/btn_ln"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_secondary_to_special"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_tanh"
@@ -199,10 +219,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_equals"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_inverse_cosh"
         app:layout_constraintTop_toBottomOf="@+id/btn_inverse_tan"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_ln"
@@ -217,10 +239,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_cos"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_rad_deg"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_log"
         app:layout_constraintTop_toBottomOf="@+id/btn_secondary_to_main"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_cos"
@@ -235,10 +259,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_cosh"
         app:layout_constraintEnd_toStartOf="@+id/btn_tan"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_sin"
         app:layout_constraintTop_toBottomOf="@+id/btn_ln"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_inverse_cosh"
@@ -253,10 +279,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_inverse_tanh"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_inverse_sinh"
         app:layout_constraintTop_toBottomOf="@+id/btn_inverse_cos"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_tan"
@@ -271,10 +299,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_tanh"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_equals"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_cos"
         app:layout_constraintTop_toBottomOf="@+id/btn_secondary_rad_deg"
-        app:layout_constraintVertical_weight="17.144" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_secondary_delete"
@@ -289,10 +319,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_secondary_equals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_secondary_to_main"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_secondary_to_main"
@@ -307,10 +339,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_secondary_rad_deg"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_delete"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="37.5"
         app:layout_constraintStart_toEndOf="@+id/btn_secondary_to_special"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_secondary_to_special"
@@ -325,10 +359,12 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_ln"
         app:layout_constraintEnd_toStartOf="@+id/btn_secondary_to_main"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="37.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="14.28" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="16.67" />
 
     <Button
         android:id="@+id/btn_secondary_equals"
@@ -341,9 +377,11 @@
         app:cornerRadius="-100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
         app:layout_constraintStart_toEndOf="@+id/btn_tanh"
         app:layout_constraintTop_toBottomOf="@+id/btn_secondary_delete"
-        app:layout_constraintVertical_weight="85.72" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="83.33" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

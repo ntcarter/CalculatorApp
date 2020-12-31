@@ -1,16 +1,13 @@
 package natec.androidapp.mycalc.ui.calculator.pads
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import natec.androidapp.mycalc.R
 import natec.androidapp.mycalc.databinding.FragmentNumpadBinding
 import natec.androidapp.mycalc.ui.calculator.viewmodel.CalculatorViewModel
 
@@ -33,6 +30,7 @@ class NumpadFragment : Fragment() {
 
         return binding.root
     }
+
 
     /**
      * initializes and attaches listeners to each of the buttons in this fragment
@@ -110,21 +108,7 @@ class NumpadFragment : Fragment() {
             viewModel.clearInput()
         }
         binding.btnMainDelete.setOnClickListener {
-            viewModel.deleteAtCursor(view?.rootView?.findViewById<EditText>(R.id.text_calc_output)?.selectionStart)
-        }
-
-        //memory TODO
-        binding.btnMc.setOnClickListener {
-
-        }
-        binding.btnMMinus.setOnClickListener {
-
-        }
-        binding.btnMPlus.setOnClickListener {
-
-        }
-        binding.btnMr.setOnClickListener {
-
+            viewModel.deleteAtCursor()
         }
 
         Log.d(TAG, ".initButtons() done")
