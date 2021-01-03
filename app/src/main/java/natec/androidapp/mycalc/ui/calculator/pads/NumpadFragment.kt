@@ -46,69 +46,69 @@ class NumpadFragment : Fragment() {
 
         //digit buttons
         binding.btnNum0.setOnClickListener {
-            viewModel.addDigitToInput("0")
+            viewModel.addToInput("0")
         }
         binding.btnNum1.setOnClickListener {
-            viewModel.addDigitToInput("1")
+            viewModel.addToInput("1")
         }
         binding.btnNum2.setOnClickListener {
-            viewModel.addDigitToInput("2")
+            viewModel.addToInput("2")
         }
         binding.btnNum3.setOnClickListener {
-            viewModel.addDigitToInput("3")
+            viewModel.addToInput("3")
         }
         binding.btnNum4.setOnClickListener {
-            viewModel.addDigitToInput("4")
+            viewModel.addToInput("4")
         }
         binding.btnNum5.setOnClickListener {
-            viewModel.addDigitToInput("5")
+            viewModel.addToInput("5")
         }
         binding.btnNum6.setOnClickListener {
-            viewModel.addDigitToInput("6")
+            viewModel.addToInput("6")
         }
         binding.btnNum7.setOnClickListener {
-            viewModel.addDigitToInput("7")
+            viewModel.addToInput("7")
         }
         binding.btnNum8.setOnClickListener {
-            viewModel.addDigitToInput("8")
+            viewModel.addToInput("8")
         }
         binding.btnNum9.setOnClickListener {
-            viewModel.addDigitToInput("9")
+            viewModel.addToInput("9")
         }
 
         //operations
         binding.btnAddition.setOnClickListener {
-            viewModel.addOperationToInput("+")
+            viewModel.addToInput("+")
+        }
+        binding.btnSubtract.setOnClickListener {
+            viewModel.addToInput("-")
+        }
+        binding.btnMultiply.setOnClickListener {
+            viewModel.addToInput("*")
+        }
+        binding.btnDivide.setOnClickListener {
+            viewModel.addToInput("/")
+        }
+        binding.btnPercent.setOnClickListener {
+            viewModel.addToInput("%")
+        }
+        binding.btnDecimal.setOnClickListener {
+            viewModel.addToInput(".")
         }
         binding.btnNeg.setOnClickListener {
-            viewModel.negateRecentNumber()
+            viewModel.addToInput("N")
+        }
+        binding.btnPar.setOnClickListener {
+            viewModel.addToInput("P")
+        }
+        binding.btnClear.setOnClickListener {
+            viewModel.addToInput("C")
+        }
+        binding.btnMainDelete.setOnClickListener {
+            viewModel.addToInput("D")
         }
         binding.btnMainEquals.setOnClickListener {
             viewModel.evaluate()
-        }
-        binding.btnDecimal.setOnClickListener {
-            viewModel.addOperationToInput(".")
-        }
-        binding.btnSubtract.setOnClickListener {
-            viewModel.addOperationToInput("-")
-        }
-        binding.btnMultiply.setOnClickListener {
-            viewModel.addOperationToInput("*")
-        }
-        binding.btnDivide.setOnClickListener {
-            viewModel.addOperationToInput("/")
-        }
-        binding.btnPar.setOnClickListener {
-            viewModel.addParentheses()
-        }
-        binding.btnPercent.setOnClickListener {
-            viewModel.addOperationToInput("%")
-        }
-        binding.btnClear.setOnClickListener {
-            viewModel.clearInput()
-        }
-        binding.btnMainDelete.setOnClickListener {
-            viewModel.deleteAtCursor()
         }
 
         Log.d(TAG, ".initButtons() done")

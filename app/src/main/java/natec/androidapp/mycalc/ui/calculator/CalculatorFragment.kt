@@ -43,7 +43,7 @@ class CalculatorFragment : Fragment() {
 
         calculatorViewModel.input.observe(viewLifecycleOwner, {
             binding.textCalcOutput.setText(it)
-            binding.textCalcOutput.setSelection(calculatorViewModel.cursorPosition)
+            binding.textCalcOutput.setSelection(calculatorViewModel.getCursorPosition())
         })
 
         calculatorViewModel.preview.observe(viewLifecycleOwner, {
@@ -55,7 +55,7 @@ class CalculatorFragment : Fragment() {
         binding.textCalcOutput.requestFocusFromTouch()
 
         binding.textCalcOutput.setOnClickListener {
-            calculatorViewModel.cursorPosition = binding.textCalcOutput.selectionStart
+            calculatorViewModel.setCursorPosition(binding.textCalcOutput.selectionStart)
         }
 
         return binding.root
