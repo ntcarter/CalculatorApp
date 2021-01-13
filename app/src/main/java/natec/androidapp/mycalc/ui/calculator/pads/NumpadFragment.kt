@@ -40,77 +40,35 @@ class NumpadFragment : Fragment() {
         binding.btnMainToSpecial.setOnClickListener {
             it.findNavController().navigate(NumpadFragmentDirections.actionNumpadFragmentToSpecialPad())
         }
-        binding.btnMainToSecondary.setOnClickListener {
+        binding.btnMainToTrig.setOnClickListener {
             it.findNavController().navigate(NumpadFragmentDirections.actionNumpadFragmentToSecondarySpecialPadFragment())
         }
 
         //digit buttons
-        binding.btnNum0.setOnClickListener {
-            viewModel.addToInput("0")
-        }
-        binding.btnNum1.setOnClickListener {
-            viewModel.addToInput("1")
-        }
-        binding.btnNum2.setOnClickListener {
-            viewModel.addToInput("2")
-        }
-        binding.btnNum3.setOnClickListener {
-            viewModel.addToInput("3")
-        }
-        binding.btnNum4.setOnClickListener {
-            viewModel.addToInput("4")
-        }
-        binding.btnNum5.setOnClickListener {
-            viewModel.addToInput("5")
-        }
-        binding.btnNum6.setOnClickListener {
-            viewModel.addToInput("6")
-        }
-        binding.btnNum7.setOnClickListener {
-            viewModel.addToInput("7")
-        }
-        binding.btnNum8.setOnClickListener {
-            viewModel.addToInput("8")
-        }
-        binding.btnNum9.setOnClickListener {
-            viewModel.addToInput("9")
-        }
+        binding.btnNum0.setOnClickListener { viewModel.addToInput("0") }
+        binding.btnNum1.setOnClickListener { viewModel.addToInput("1") }
+        binding.btnNum2.setOnClickListener { viewModel.addToInput("2") }
+        binding.btnNum3.setOnClickListener { viewModel.addToInput("3") }
+        binding.btnNum4.setOnClickListener { viewModel.addToInput("4") }
+        binding.btnNum5.setOnClickListener { viewModel.addToInput("5") }
+        binding.btnNum6.setOnClickListener { viewModel.addToInput("6") }
+        binding.btnNum7.setOnClickListener { viewModel.addToInput("7") }
+        binding.btnNum8.setOnClickListener { viewModel.addToInput("8") }
+        binding.btnNum9.setOnClickListener { viewModel.addToInput("9") }
 
         //operations
-        binding.btnAddition.setOnClickListener {
-            viewModel.addToInput("+")
-        }
-        binding.btnSubtract.setOnClickListener {
-            viewModel.addToInput("-")
-        }
-        binding.btnMultiply.setOnClickListener {
-            viewModel.addToInput("*")
-        }
-        binding.btnDivide.setOnClickListener {
-            viewModel.addToInput("/")
-        }
-        binding.btnPercent.setOnClickListener {
-            viewModel.addToInput("%")
-        }
-        binding.btnDecimal.setOnClickListener {
-            viewModel.addToInput(".")
-        }
-        binding.btnNeg.setOnClickListener {
-            viewModel.addToInput("N")
-        }
-        binding.btnPar.setOnClickListener {
-            viewModel.addToInput("P")
-        }
-        binding.btnClear.setOnClickListener {
-            viewModel.addToInput("C")
-        }
-        binding.btnMainDelete.setOnClickListener {
-            viewModel.addToInput("D")
-        }
-        binding.btnMainEquals.setOnClickListener {
-            viewModel.evaluate()
-        }
-
-        Log.d(TAG, ".initButtons() done")
+        binding.btnAddition.setOnClickListener { viewModel.addToInput("+") }
+        binding.btnSubtract.setOnClickListener { viewModel.addToInput("-") }
+        binding.btnMultiply.setOnClickListener { viewModel.addToInput("*") }
+        binding.btnDivide.setOnClickListener { viewModel.addToInput("÷") }
+        binding.btnPercent.setOnClickListener { viewModel.addToInput("%") }
+        binding.btnDecimal.setOnClickListener { viewModel.addToInput(".") }
+        binding.btnNeg.setOnClickListener { viewModel.addToInput("N") }
+        binding.btnPar.setOnClickListener { viewModel.addToInput("P") }
+        binding.btnClear.setOnClickListener { viewModel.addToInput("C") }
+        binding.btnMainDelete.setOnClickListener { viewModel.addToInput("D") }
+        binding.btnMainDelete.setOnLongClickListener { viewModel.addToInput("C")
+            true}
+        binding.btnMainEquals.setOnClickListener { viewModel.evaluate() }
     }
 }

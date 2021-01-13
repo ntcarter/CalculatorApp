@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import natec.androidapp.mycalc.R
 import natec.androidapp.mycalc.databinding.FragmentCalculatorBinding
 import natec.androidapp.mycalc.ui.calculator.viewmodel.CalculatorViewModel
 
@@ -24,11 +25,7 @@ class CalculatorFragment : Fragment() {
 
     private lateinit var calculatorViewModel: CalculatorViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //multiple fragments share the same instance of the calculatorViewModel
         // so scope the viewModel to the activity hosting all of the fragments.
         calculatorViewModel = ViewModelProvider(requireActivity()).get(CalculatorViewModel::class.java)
@@ -48,6 +45,14 @@ class CalculatorFragment : Fragment() {
 
         calculatorViewModel.preview.observe(viewLifecycleOwner, {
             binding.textPreview.setText(it)
+        })
+
+        calculatorViewModel.radOrDeg.observe(viewLifecycleOwner, {
+            if(it == true){
+                binding.textRadDeg.text = getString(R.string.Deg)
+            }else{
+                binding.textRadDeg.text = getString(R.string.Rad)
+            }
         })
 
         // need to request focus or the first click will be consumed by this call

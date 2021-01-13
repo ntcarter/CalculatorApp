@@ -39,8 +39,9 @@ class CalculatorVMHelper {
             resultInput = ""
         }
 
+        val charBC = getCharBeforeCursor(resultInput)
         //if the last char before our cursor is a ) we want to add a * when adding a digit
-        if (getCharBeforeCursor(resultInput) == ')') {
+        if (charBC == ')' || charBC == 'π' || charBC == 'e') {
             resultInput = resultInput.insert(cursorPosition, "*")
             cursorPosition++
         }
@@ -55,7 +56,6 @@ class CalculatorVMHelper {
     }
 
     fun addNonDigit(input: String, strToAdd: String): String {
-        Log.d(TAG, "addnondigit starts adding $strToAdd")
         var resultInput = input
 
 
@@ -63,11 +63,11 @@ class CalculatorVMHelper {
         val charAC = getCharAfterCursor(input)
 
         when (strToAdd) {
-            "+", "-", "*", "/", "%" -> {
+            "+", "-", "*", "÷", "%" -> {
                 //dont let a *, /, % be entered after a ( or as the first character
-                if ((strToAdd == "*" || strToAdd == "/" || strToAdd == "%") && (charBC == '(' || cursorPosition == 0)) {
+                if ((strToAdd == "*" || strToAdd == "÷" || strToAdd == "%") && (charBC == '(' || cursorPosition == 0)) {
                     return resultInput
-                } else if ((strToAdd == "*" || strToAdd == "/") && charBC != null && isOperation(charBC)
+                } else if ((strToAdd == "*" || strToAdd == "÷") && charBC != null && isOperation(charBC)
                     && cursorPosition > 1 && resultInput[cursorPosition - 2] == '(') {
                     return resultInput
                 }
@@ -105,11 +105,88 @@ class CalculatorVMHelper {
             "P" -> {
                 resultInput = addParentheses(input, charBC, charAC)
             }
+            "e" -> {
+                if(cursorPosition > 0 && (resultInput[cursorPosition -1] == ')' ||
+                            resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'π')){
+                    resultInput = resultInput.insert(cursorPosition, "*")
+                    cursorPosition++
+                }
+                resultInput += strToAdd
+                cursorPosition+= strToAdd.length
+            }
+            "e^x" -> {
+                if(cursorPosition > 0 && (resultInput[cursorPosition -1] == ')' ||
+                            resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'π')){
+                    resultInput = resultInput.insert(cursorPosition, "*")
+                    cursorPosition++
+                }
+                resultInput += "e^("
+                numOpenLeftPar++
+                cursorPosition += 3
+            }
+            "x^3" -> {
+                if (cursorPosition > 0 && (resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1] == 'π')){
+                    resultInput += "^(3)"
+                    cursorPosition += 4
+                }
+            }
+            "x^2" -> {
+                if (cursorPosition > 0 &&  (resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1] == 'π')){
+                    resultInput += "^(2)"
+                    cursorPosition += 4
+                }
+            }
+            "x^y" -> {
+                if (cursorPosition > 0 &&  (resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1] == 'π')){
+                    resultInput += "^("
+                    cursorPosition += 2
+                }
+            }
+            "2^x" -> {
+                if(cursorPosition > 0 && (resultInput[cursorPosition -1] == ')' ||
+                            resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'π' )){
+                    resultInput = resultInput.insert(cursorPosition, "*")
+                    cursorPosition++
+                }
+                resultInput += "2^("
+                numOpenLeftPar++
+                cursorPosition += 3
+            }
+            "10^x" -> {
+                if(cursorPosition > 0 && (resultInput[cursorPosition -1] == ')' ||
+                            resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'π' )){
+                    resultInput = resultInput.insert(cursorPosition, "*")
+                    cursorPosition++
+                }
+                resultInput += "10^("
+                numOpenLeftPar++
+                cursorPosition += 4
+            }
+            "xN1"->{
+                if (cursorPosition > 0 &&  (resultInput[cursorPosition -1].isDigit() || resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1] == 'π')){
+                    resultInput += "^(-1)"
+                    cursorPosition += 5
+                }
+            }
+            "PI" ->{
+                if(cursorPosition > 0 && (resultInput[cursorPosition -1] == ')' ||
+                            resultInput[cursorPosition -1] == 'e' || resultInput[cursorPosition -1].isDigit() )){
+                    resultInput = resultInput.insert(cursorPosition, "*")
+                    cursorPosition++
+                }
+                resultInput += "π"
+                cursorPosition++
+            }
+            "!" ->{
+                if(cursorPosition > 0 && (resultInput[cursorPosition - 1].isDigit()  || resultInput[cursorPosition - 1] == 'e' || resultInput[cursorPosition - 1] == 'π')){
+                    resultInput += "!"
+                    cursorPosition++
+                }
+            }
         }
 
         //after an operation input is not a result
         isResult = false
-        Log.d(TAG, "addNonDigit ends returning: $resultInput")
         return resultInput
     }
 
@@ -128,7 +205,7 @@ class CalculatorVMHelper {
         } else {
             if (charBC == '(' || numOpenLeftPar == 0) {
                 //if the thing before the ( is a digit insert a *
-                if (charBC != null && charBC.isDigit()) {
+                if (charBC != null && charBC.isDigit() || charBC == 'π' || charBC == 'e') {
                     resInput = resInput.insert(cursorPosition, "*")
                     cursorPosition++
                 }
@@ -141,7 +218,7 @@ class CalculatorVMHelper {
                 numOpenLeftPar--
 
                 // if the thing to the right of the ) is a digit, add a *
-                if (charAC != null && charAC.isDigit()) {
+                if (charAC != null && charAC.isDigit() || charBC == 'π' || charBC == 'e') {
                     resInput = resInput.insert(cursorPosition, "*")
                     cursorPosition++
                 }
@@ -153,7 +230,7 @@ class CalculatorVMHelper {
     }
 
     private fun isOperation(input: Char): Boolean {
-        return input == '*' || input == '+' || input == '-' || input == '/'
+        return input == '*' || input == '+' || input == '-' || input == '÷'
     }
 
     /**
@@ -189,9 +266,31 @@ class CalculatorVMHelper {
             //change calc state for thing we are going to delete
             when (input[cursorPosition - 1]) {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> numDigitsInARow--
-                '+', '-', '*', '/', '%' -> totalOperations--
-                '(' -> numOpenLeftPar--
+                '+', '-', '*', '÷', '%' -> totalOperations--
+                '(' -> {
+                    //get the number of chars around the cursors position to delete
+                    if(cursorPosition > 1 && isSpecialChar(input[cursorPosition - 2])){
+                        //get the range of special chars
+                        val (lIndex, rIndex) = getSpecialRange(input ,cursorPosition - 1)
+                        resultInput = resultInput.subSequence(0, lIndex).toString() + resultInput.subSequence(rIndex + 1, input.length).toString()
+                        numOpenLeftPar--
+                        cursorPosition = lIndex
+                        return resultInput
+                    }
+                    numOpenLeftPar--
+                }
                 ')' -> numOpenLeftPar++
+                else -> {
+                    //All else conditions should be a letter of a special input
+                    if (isSpecialChar(input[cursorPosition - 1])){
+                        //get the range of special chars
+                        val (lIndex, rIndex) = getSpecialRange(input, cursorPosition)
+                        resultInput = resultInput.subSequence(0, lIndex).toString() + resultInput.subSequence(rIndex + 1, input.length).toString()
+                        numOpenLeftPar--
+                        cursorPosition = lIndex
+                        return resultInput
+                    }
+                }
             }
 
             resultInput = input.subSequence(0, cursorPosition - 1).toString() +
@@ -202,6 +301,32 @@ class CalculatorVMHelper {
         return resultInput
     }
 
+    /**
+     * returns the number of characters around the cursor that are special. Excludes (
+     */
+    private fun getSpecialRange(input: String, position: Int): Pair<Int, Int>{
+        var leftCursor = position
+        var rightCursor = position
+
+        while (leftCursor > 0 && isSpecialChar(input[leftCursor - 1])){
+            leftCursor--
+        }
+
+        while (rightCursor < input.length && isSpecialChar(input[rightCursor])){
+            rightCursor++
+        }
+
+        return Pair(leftCursor, rightCursor)
+    }
+
+    /**
+     * Checks to see if the current char is a Special Character
+     */
+    private fun isSpecialChar(char: Char): Boolean{
+        return char == 'L' || char == 'O' || char == 'G' || char == 'N' || char == 'R' || char == 'A'
+                || char == 'D' || char == 'S' || char == 'I' || char == 'C' || char == 'T' || char == 'H' || char == 'Q'
+    }
+
     fun clearInput(): String {
         cursorPosition = 0
         numOpenLeftPar = 0
@@ -209,34 +334,40 @@ class CalculatorVMHelper {
         return ""
     }
 
-    fun negate(input: String): String{
+    fun negate(input: String): String {
         var resultInput = input
 
         //special condition input is empty
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             resultInput = "(-"
             numOpenLeftPar++
             cursorPosition += 2
             return resultInput
-        }else if (input == "(-"){
+        } else if (input == "(-") {
             resultInput = ""
             numOpenLeftPar--
             cursorPosition = 0
             return resultInput
         }
 
-        val negatePosition = firstOpFromCursor(input)
+        val negatePosition = firstOpFromCursor(input, cursorPosition)
 
+        if(resultInput[negatePosition] == '-' && negatePosition > 1 && resultInput[negatePosition - 1]
+                == '(' && isSpecialChar( resultInput[negatePosition - 2])){
+            resultInput = resultInput.replaceRange(negatePosition, negatePosition + 1, "")
+            numOpenLeftPar--
+            cursorPosition -= 1
+            return resultInput
         // if the value at negatePosition is a - check the thing to the left.
         // if it is a ( we need to undo a negation
-        if(resultInput[negatePosition] == '-' && negatePosition > 0 && resultInput[negatePosition - 1] == '('){
+        }else if(resultInput[negatePosition] == '-' && negatePosition > 0 && resultInput[negatePosition - 1] == '('){
             resultInput = resultInput.replaceRange(negatePosition -1, negatePosition + 1, "")
             numOpenLeftPar--
             cursorPosition -= 2
             return resultInput
         // our value is already negative in the format -25 remove the -
         // This can only happen with a result, so index will be 0
-        }else if(resultInput[negatePosition] == '-' && negatePosition == 0){
+        }else if((resultInput[negatePosition] == '-' && negatePosition == 0)){
             resultInput = resultInput.replaceRange(negatePosition, negatePosition+1, "")
             cursorPosition--
             return resultInput
@@ -249,7 +380,7 @@ class CalculatorVMHelper {
             return resultInput
         }
 
-        //if index is 0 we insert negation before the index, if > 0 after the index
+        //if negatePosition is 0 we insert negation before the index, if > 0 after the index
         if (negatePosition == 0) {
             resultInput = resultInput.insert(negatePosition, "(-")
             cursorPosition += 2
@@ -263,22 +394,47 @@ class CalculatorVMHelper {
         return resultInput
     }
 
-    private fun firstOpFromCursor(expression: String): Int{
+    fun firstOpFromCursor(expression: String, startPos: Int): Int{
         //if the expression is length 0 or 1 we return the 0th index
         if(expression.length <= 1){
             return 0
         }
 
         //all expressions at this point have length >= 2
-        for(i in cursorPosition - 1 downTo 0){
+        for(i in startPos - 1 downTo 0){
+            if(i == 0){
+                return 0
+            }
             if (!(expression[i].isDigit())) {
                 //these conditions aren't considered an operation
-                if (expression[i] != '.' && !(expression[i]== '+' && expression[i - 1] == 'E') && !(expression[i]== '-' && expression[i - 1] == 'E') && expression[i] != 'E') {
+                if (expression[i] != '.' && expression[i] != 'π' && expression[i] != 'e'
+                    && !(expression[i]== '+' && expression[i - 1] == 'E') &&
+                    !(expression[i]== '-' && expression[i - 1] == 'E') && expression[i] != 'E') {
                     return i
                 }
             }
         }
 
         return 0
+    }
+
+    fun handleSpecial(input: String, specialToAdd: String): String{
+        var resultInput = input
+        //add special at cursorPosition based on the input
+        //increase cursor position based on specialToAdd.length
+        //if there's a digit on the left then add a *
+        val charBC = getCharBeforeCursor(input)
+
+        if(charBC != null && (charBC.isDigit() || charBC == ')')){
+            resultInput = resultInput.insert(cursorPosition, "*")
+            cursorPosition++
+            isResult = false
+        }
+
+        resultInput = resultInput.insert(cursorPosition, "$specialToAdd(")
+        cursorPosition += specialToAdd.length + 1
+        numOpenLeftPar++
+
+        return resultInput
     }
 }

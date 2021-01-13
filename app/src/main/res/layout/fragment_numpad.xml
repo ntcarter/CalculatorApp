@@ -219,7 +219,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/btn_par"
-        app:layout_constraintTop_toBottomOf="@+id/btn_main_to_secondary"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_to_trig"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintVertical_weight="1" />
 
@@ -261,7 +261,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="25"
-        app:layout_constraintStart_toEndOf="@+id/btn_main_to_secondary"
+        app:layout_constraintStart_toEndOf="@+id/btn_main_to_trig"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintVertical_weight="1" />
@@ -276,7 +276,7 @@
         android:text="@string/special"
         app:cornerRadius="-100dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_percent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_main_to_secondary"
+        app:layout_constraintEnd_toStartOf="@+id/btn_main_to_trig"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="37.5"
@@ -286,14 +286,14 @@
         app:layout_constraintVertical_weight="1" />
 
     <Button
-        android:id="@+id/btn_main_to_secondary"
+        android:id="@+id/btn_main_to_trig"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:insetLeft="0.5dp"
         android:insetTop="0dp"
         android:insetRight="0.5dp"
         android:insetBottom="0.5dp"
-        android:text="@string/secondary"
+        android:text="@string/trig_log"
         app:cornerRadius="-100dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_clear"
         app:layout_constraintEnd_toStartOf="@+id/btn_main_delete"

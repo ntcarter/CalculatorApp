@@ -6,13 +6,14 @@
 
     <!-- Calculator String values-->
     <string name="c">C</string>
+    <string name="e">e</string>
     <string name="parentheses">()</string>
     <string name="delete">Delete</string>
     <string name="_8">8</string>
-    <string name="modulo">Modulo (%)</string>
+    <string name="modulo">Modulo\n(%)</string>
     <string name="_6">6</string>
     <string name="minus">-</string>
-    <string name="divide">/</string>
+    <string name="divide">÷</string>
     <string name="multiply">X</string>
     <string name="equals">=</string>
     <string name="_2">2</string>
@@ -28,4 +29,32 @@
     <string name="_5">5</string>
     <string name="secondary">secondary</string>
     <string name="special">special</string>
+    <string name="Deg">Deg</string>
+    <string name="Rad">Rad</string>
+    <string name="pow_neg_one">x^(-1)</string>
+    <string name="root">√</string>
+    <string name="pow_3">x^3</string>
+    <string name="factorial">x!</string>
+    <string name="_10_x">10^x</string>
+    <string name="_2_x">2^x</string>
+    <string name="pi">π</string>
+    <string name="e_x">e^x</string>
+    <string name="x_2">x^2</string>
+    <string name="x_y">x^y</string>
+    <string name="trig_log">trig\n(Log)</string>
+    <string name="tanh">tanh</string>
+    <string name="cos_1">cos^-1</string>
+    <string name="log">log</string>
+    <string name="cosh">cosh</string>
+    <string name="tanh_1">tanh^-1</string>
+    <string name="sin_1">sin^-1</string>
+    <string name="sin">sin</string>
+    <string name="sinh_1">sinh^-1</string>
+    <string name="sinh">sinh</string>
+    <string name="tan_1">tan^-1</string>
+    <string name="ln">ln</string>
+    <string name="cos">cos</string>
+    <string name="cosh_1">cosh^-1</string>
+    <string name="tan">tan</string>
+    <string name="main">main</string>
 </resources>
