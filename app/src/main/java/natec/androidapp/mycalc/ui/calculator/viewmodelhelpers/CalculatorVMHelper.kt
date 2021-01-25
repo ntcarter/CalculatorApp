@@ -15,13 +15,6 @@ class CalculatorVMHelper {
     //stores the state of the input. True if its a result of an operation
     var isResult = false
 
-    //var to track num of digits pressed before an operation or evaluation is pressed
-    //should not exceed 20
-    private var numDigitsInARow = 0
-
-    //tracks the number of operations in one expression. can not exceed 10
-    private var totalOperations = 0
-
     // Tracks the cursor position for inserting and deleting.
     // CHANGE CURSOR POSITION BEFORE UPDATING _input.value, then compensate when accessing _input.value
     var cursorPosition: Int = 0
@@ -29,6 +22,9 @@ class CalculatorVMHelper {
     //keeps track of the number of open left parentheses. at 0 there are equal left and right parentheses
     private var numOpenLeftPar = 0
 
+    /**
+     * adds a digit to the input string and returns the new string
+     */
     fun addDigit(input: String, strToAdd: String): String {
         var resultInput = input
         // if the value stored in a input is a result of an operation being evaluated and is not an operation
@@ -50,11 +46,12 @@ class CalculatorVMHelper {
         resultInput = resultInput.insert(cursorPosition, strToAdd)
         cursorPosition++
 
-        numDigitsInARow++
-
         return resultInput
     }
 
+    /**
+     * Adds a non-digit operator to the input string and returns the result
+     */
     fun addNonDigit(input: String, strToAdd: String): String {
         var resultInput = input
 
@@ -229,6 +226,9 @@ class CalculatorVMHelper {
         return resInput
     }
 
+    /**
+     * checks if the input is a valid operation
+     */
     private fun isOperation(input: Char): Boolean {
         return input == '*' || input == '+' || input == '-' || input == '÷'
     }
@@ -255,6 +255,9 @@ class CalculatorVMHelper {
         return input[cursorPosition - 1]
     }
 
+    /**
+     * deletes the operation before the cursor
+     */
     fun deleteAtCursor(input: String): String {
         if (cursorPosition == 0) {
             return input
@@ -265,8 +268,6 @@ class CalculatorVMHelper {
         if (input.isNotEmpty()) {
             //change calc state for thing we are going to delete
             when (input[cursorPosition - 1]) {
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> numDigitsInARow--
-                '+', '-', '*', '÷', '%' -> totalOperations--
                 '(' -> {
                     //get the number of chars around the cursors position to delete
                     if(cursorPosition > 1 && isSpecialChar(input[cursorPosition - 2])){
@@ -303,6 +304,7 @@ class CalculatorVMHelper {
 
     /**
      * returns the number of characters around the cursor that are special. Excludes (
+     * around the cursor is everything to the left and right that is a special character
      */
     private fun getSpecialRange(input: String, position: Int): Pair<Int, Int>{
         var leftCursor = position
@@ -327,6 +329,9 @@ class CalculatorVMHelper {
                 || char == 'D' || char == 'S' || char == 'I' || char == 'C' || char == 'T' || char == 'H' || char == 'Q'
     }
 
+    /**
+     * Clears the input, resets all state values and returns an empty string
+     */
     fun clearInput(): String {
         cursorPosition = 0
         numOpenLeftPar = 0
@@ -334,6 +339,10 @@ class CalculatorVMHelper {
         return ""
     }
 
+    /**
+     * Negates the input adding/removing the appropriate parenthesis and negation signs
+     * Returns the negated input
+     */
     fun negate(input: String): String {
         var resultInput = input
 
@@ -394,6 +403,9 @@ class CalculatorVMHelper {
         return resultInput
     }
 
+    /**
+     * Searches the input for the first operation from the cursor
+     */
     fun firstOpFromCursor(expression: String, startPos: Int): Int{
         //if the expression is length 0 or 1 we return the 0th index
         if(expression.length <= 1){
@@ -418,6 +430,9 @@ class CalculatorVMHelper {
         return 0
     }
 
+    /**
+     * Adds special input to the input string. This includes things like TRIG functions and LN/LOG
+     */
     fun handleSpecial(input: String, specialToAdd: String): String{
         var resultInput = input
         //add special at cursorPosition based on the input

@@ -1,11 +1,8 @@
 package natec.androidapp.mycalc.ui.calculator.viewmodel
 
-import android.app.Application
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.udojava.evalex.Expression
 import natec.androidapp.mycalc.insert
 import natec.androidapp.mycalc.ui.calculator.viewmodelhelpers.CalculatorVMHelper
@@ -22,7 +19,7 @@ import java.util.Stack
  */
 private const val TAG = "CalculatorViewModel"
 
-class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
+class CalculatorViewModel() : ViewModel() {
 
     // live data variable for the display that changes as the user provides input
     private val _input = MutableLiveData<String>()
@@ -38,6 +35,11 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     private val _radOrDeg = MutableLiveData<Boolean>()
     val radOrDeg: LiveData<Boolean>
         get() = _radOrDeg
+
+    //liveData to hold toast strings. null when there isn't a toast to show
+    private val _toaster = MutableLiveData<String?>()
+    val toaster: LiveData<String?>
+        get() = _toaster
 
     private val numPadHelper = CalculatorVMHelper()
 
@@ -71,7 +73,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * Function to handle special input. Passes it to the helper
+     * Function to handle special input like trig functions and LOG. Passes it to the helper
      */
     fun addSpecialToInput(userInput: String){
         _input.value = numPadHelper.handleSpecial(_input.value!! , userInput)
@@ -104,12 +106,11 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             _preview.value = ""
             numPadHelper.isResult = true
         } catch (e: Expression.ExpressionException) {
-            //TODO("Remove toast from view model, change viewmodel extension back")
-            Toast.makeText(getApplication(), "Invalid expression", Toast.LENGTH_SHORT).show()
+            _toaster.value = "Invalid Expression"
         } catch (e: ArithmeticException) {
-            Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            _toaster.value = "Error: ${e.message}"
         } catch (e: NumberFormatException) {
-            Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            _toaster.value = "Error: ${e.message}"
         }
     }
 
@@ -133,12 +134,15 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         } catch (e: Expression.ExpressionException) {
             _preview.value = ""
         } catch (e: ArithmeticException) {
-            //Toast.makeText(getApplication(),"Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            _toaster.value = "Error: ${e.message}"
         } catch (e: NumberFormatException) {
-            Toast.makeText(getApplication(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             //the last thing input caused an error so delete it
             _input.value = numPadHelper.deleteAtCursor(_input.value!!)
         }
+    }
+
+    fun doneShowingToast(){
+        _toaster.value = null
     }
 
     /**
@@ -156,7 +160,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     /**
-     * The evaluation library uses annoying formatting for some input so we change it to make it
+     * The evaluation library uses annoying formatting for some input so we changed it to make it
      * easier to use for the user. It must be changed back into the form the evaluator is expecting
      */
     private fun convertInput(): String{
@@ -177,10 +181,12 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
 
         convertInput = convertInput!!.replace("π", "PI")
 
-        Log.d(TAG, "convertInput AFTER factorial conversion: $convertInput")
         return convertInput
     }
 
+    /**
+     * function to insert factorial operator in the correct position for the evaluator
+     */
     private fun insertFact(index: Int, convertInput: String): String{
         val opPos = numPadHelper.firstOpFromCursor(convertInput, index)
 
@@ -191,6 +197,9 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
+    /**
+     * adds RAD or DEG tags to the input and handles adding extra parenthesis
+     */
     private fun wrapInput(input: String): String{
         var resultInput = input
 
@@ -235,6 +244,9 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         return resultInput
     }
 
+    /**
+     * Changes the type of evaluation from RAD to DEG or reverse
+     */
     fun changeMode(){
         _radOrDeg.value = !(radOrDeg.value)!!
         evaluateForPreview()

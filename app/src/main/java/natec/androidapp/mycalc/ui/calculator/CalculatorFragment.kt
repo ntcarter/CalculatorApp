@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import natec.androidapp.mycalc.R
@@ -52,6 +53,19 @@ class CalculatorFragment : Fragment() {
                 binding.textRadDeg.text = getString(R.string.Deg)
             }else{
                 binding.textRadDeg.text = getString(R.string.Rad)
+            }
+        })
+
+        //handles creating error toasts
+        calculatorViewModel.toaster.observe(viewLifecycleOwner, {
+            if(it != null) {
+                Log.d(TAG, "showing toast!")
+                Toast.makeText(
+                    requireContext(),
+                    calculatorViewModel.toaster.value,
+                    Toast.LENGTH_SHORT
+                ).show()
+                calculatorViewModel.doneShowingToast()
             }
         })
 

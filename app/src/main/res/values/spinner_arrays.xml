@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="convert_types">
+        <item>@string/length</item>
+        <item>@string/area</item>
+        <item>@string/data</item>
+        <item>@string/mass</item>
+        <item>@string/speed</item>
+        <item>@string/temp</item>
+        <item>@string/time</item>
+        <item>@string/vol</item>
+    </string-array>
+
+    <string-array name="type_area">
+        <item>@string/sq_km</item>
+        <item>@string/sq_me</item>
+        <item>@string/sq_mi</item>
+        <item>@string/sq_ft</item>
+        <item>@string/sq_in</item>
+        <item>@string/sq_yd</item>
+        <item>@string/acre</item>
+        <item>@string/hectare</item>
+    </string-array>
+
+    <string-array name="type_data">
+        <item>@string/bit</item>
+        <item>@string/kilobit</item>
+        <item>@string/megabit</item>
+        <item>@string/gigabit</item>
+        <item>@string/terabit</item>
+        <item>@string/petabit</item>
+        <item>@string/ebyte</item>
+        <item>@string/kilobyte</item>
+        <item>@string/megabyte</item>
+        <item>@string/gigabyte</item>
+        <item>@string/terabyte</item>
+        <item>@string/petabyte</item>
+    </string-array>
+
+    <string-array name="type_length">
+        <item>@string/kilometer</item>
+        <item>@string/meter</item>
+        <item>@string/centimeter</item>
+        <item>@string/millimeter</item>
+        <item>@string/nanometer</item>
+        <item>@string/mile</item>
+        <item>@string/yard</item>
+        <item>@string/foot</item>
+        <item>@string/inch</item>
+    </string-array>
+
+    <string-array name="type_mass">
+        <item>@string/kilogram</item>
+        <item>@string/gram</item>
+        <item>@string/milligram</item>
+        <item>@string/microgram</item>
+        <item>@string/stone</item>
+        <item>@string/pound</item>
+        <item>@string/oz</item>
+    </string-array>
+
+    <string-array name="type_speed">
+        <item>@string/mph</item>
+        <item>@string/fps</item>
+        <item>@string/mps</item>
+        <item>@string/kph</item>
+    </string-array>
+
+    <string-array name="type_temperature">
+        <item>@string/fahrenheit</item>
+        <item>@string/celsius</item>
+        <item>@string/kelvin</item>
+    </string-array>
+
+    <string-array name="type_time">
+        <item>@string/nanosecond</item>
+        <item>@string/millisecond</item>
+        <item>@string/second</item>
+        <item>@string/minute</item>
+        <item>@string/hour</item>
+        <item>@string/day</item>
+        <item>@string/week</item>
+        <item>@string/month</item>
+        <item>@string/year</item>
+    </string-array>
+
+    <string-array name="type_volume">
+        <item>@string/inch_3</item>
+        <item>@string/foot_3</item>
+        <item>@string/meter_3</item>
+        <item>@string/liter</item>
+        <item>@string/milliliter</item>
+        <item>@string/us_gal</item>
+        <item>@string/us_quart</item>
+        <item>@string/us_pint</item>
+        <item>@string/us_cup</item>
+        <item>@string/us_tbspoon</item>
+        <item>@string/teaspoon</item>
+        <item>@string/gal</item>
+        <item>@string/quart</item>
+        <item>@string/pint</item>
+        <item>@string/cup</item>
+        <item>@string/tbspoon</item>
+        <item>@string/teaspoon</item>
+    </string-array>
+</resources>

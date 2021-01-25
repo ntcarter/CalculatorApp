@@ -1,34 +1,33 @@
 <resources>
     <string name="app_name">MyCalc</string>
-    <string name="title_settings">Settings</string>
     <string name="title_calculator">Calculator</string>
     <string name="title_convert">Convert</string>
 
-    <!-- Calculator String values-->
+    <!-- Calculator Button String Values-->
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="c">C</string>
     <string name="e">e</string>
-    <string name="parentheses">()</string>
-    <string name="delete">Delete</string>
-    <string name="_8">8</string>
-    <string name="modulo">Modulo\n(%)</string>
-    <string name="_6">6</string>
+    <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="divide">÷</string>
     <string name="multiply">X</string>
+    <string name="parentheses">()</string>
+    <string name="delete">Delete</string>
+    <string name="modulo">Modulo\n(%)</string>
     <string name="equals">=</string>
-    <string name="_2">2</string>
-    <string name="_1">1</string>
-    <string name="_9">9</string>
-    <string name="_7">7</string>
-    <string name="_3">3</string>
-    <string name="plus">+</string>
     <string name="negate">+/-</string>
-    <string name="_0">0</string>
     <string name="decimal">.</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="secondary">secondary</string>
     <string name="special">special</string>
+    <string name="main">main</string>
     <string name="Deg">Deg</string>
     <string name="Rad">Rad</string>
     <string name="pow_neg_one">x^(-1)</string>
@@ -42,19 +41,120 @@
     <string name="x_2">x^2</string>
     <string name="x_y">x^y</string>
     <string name="trig_log">trig\n(Log)</string>
+    <string name="tan">tan</string>
     <string name="tanh">tanh</string>
-    <string name="cos_1">cos^-1</string>
-    <string name="log">log</string>
-    <string name="cosh">cosh</string>
     <string name="tanh_1">tanh^-1</string>
+    <string name="tan_1">tan^-1</string>
     <string name="sin_1">sin^-1</string>
     <string name="sin">sin</string>
     <string name="sinh_1">sinh^-1</string>
     <string name="sinh">sinh</string>
-    <string name="tan_1">tan^-1</string>
-    <string name="ln">ln</string>
     <string name="cos">cos</string>
     <string name="cosh_1">cosh^-1</string>
-    <string name="tan">tan</string>
-    <string name="main">main</string>
+    <string name="cosh">cosh</string>
+    <string name="cos_1">cos^-1</string>
+    <string name="ln">ln</string>
+    <string name="log">log</string>
+
+    <!-- Convert Types-->
+    <string name="length">Length</string>
+    <string name="area">Area</string>
+    <string name="data">Data</string>
+    <string name="mass">Mass</string>
+    <string name="speed">Speed</string>
+    <string name="temp">Temperature</string>
+    <string name="time">Time</string>
+    <string name="vol">Volume</string>
+
+    <!-- Convert values -->
+    <!-- Area -->
+    <string name="sq_km">Square Kilometer</string>
+    <string name="sq_me">Square Meter</string>
+    <string name="sq_mi">Square Mile</string>
+    <string name="sq_ft">Square Feet</string>
+    <string name="sq_in">Square Inch</string>
+    <string name="sq_yd">Square Yard</string>
+    <string name="acre">Acre</string>
+    <string name="hectare">Hectare</string>
+
+    <!-- Data -->
+    <string name="bit">Bit</string>
+    <string name="kilobit">Kilobit</string>
+    <string name="megabit">Megabit</string>
+    <string name="gigabit">Gigabit</string>
+    <string name="terabit">Terabit</string>
+    <string name="petabit">Petabit</string>
+    <string name="ebyte">Byte</string>
+    <string name="kilobyte">Kilobyte</string>
+    <string name="megabyte">Megabyte</string>
+    <string name="gigabyte">Gigabyte</string>
+    <string name="terabyte">Terabyte</string>
+    <string name="petabyte">Petabyte</string>
+
+    <!-- Length -->
+    <string name="kilometer">Kilometer</string>
+    <string name="meter">Meter</string>
+    <string name="centimeter">Centimeter</string>
+    <string name="millimeter">Millimeter</string>
+    <string name="nanometer">Nanometer</string>
+    <string name="mile">Mile</string>
+    <string name="yard">Yard</string>
+    <string name="foot">Foot</string>
+    <string name="inch">Inch</string>
+
+    <!-- Mass -->
+    <string name="kilogram">Kilogram</string>
+    <string name="gram">Gram</string>
+    <string name="milligram">Milligram</string>
+    <string name="microgram">Microgram</string>
+    <string name="stone">Stone</string>
+    <string name="pound">Pounds</string>
+    <string name="oz">Ounce</string>
+
+    <!-- Speed -->
+    <string name="mph">Miles per Hour</string>
+    <string name="fps">Feet per Second</string>
+    <string name="kph">Kilometers per Hour</string>
+    <string name="mps">Meters per Second</string>
+
+    <!-- Temp -->
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+
+    <!-- Time -->
+    <string name="nanosecond">Nanosecond</string>
+    <string name="millisecond">Millisecond</string>
+    <string name="second">Second</string>
+    <string name="minute">Minute</string>
+    <string name="hour">Hour</string>
+    <string name="day">Day</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+
+    <!-- Volume -->
+    <string name="inch_3">Cubic Inch</string>
+    <string name="foot_3">Cubic Foot</string>
+    <string name="meter_3">Cubic Meter</string>
+    <string name="liter">Liter</string>
+    <string name="milliliter">Milliliter</string>
+    <string name="us_gal">(US) Gallon</string>
+    <string name="us_quart">(US) Quart</string>
+    <string name="us_pint">(US) Pint</string>
+    <string name="us_cup">(US) Cup</string>
+    <string name="us_tbspoon">(US) Tablespoon</string>
+    <string name="us_teaspoon">(US) Teaspoon</string>
+    <string name="gal">Gallon</string>
+    <string name="quart">Quart</string>
+    <string name="pint">Pint</string>
+    <string name="cup">Cup</string>
+    <string name="tbspoon">Tablespoon</string>
+    <string name="teaspoon">Teaspoon</string>
+
+
+    <string name="to">TO</string>
+    <string name="convert_type">Convert Type:</string>
+    <string name="O_0">0.0</string>
+
 </resources>
