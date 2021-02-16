@@ -3,8 +3,6 @@ package natec.androidapp.mycalc.ui.calculator.viewmodelhelpers
 import android.util.Log
 import natec.androidapp.mycalc.insert
 
-private const val TAG = "CalculatorVMHelper"
-
 /**
  * Helper class to hold all of the logic for adding input to the expression string
  * Does not evaluate the expression string

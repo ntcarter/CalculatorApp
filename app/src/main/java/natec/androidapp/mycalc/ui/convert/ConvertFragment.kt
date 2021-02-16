@@ -2,7 +2,6 @@ package natec.androidapp.mycalc.ui.convert
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import natec.androidapp.mycalc.databinding.FragmentConvertBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-private const val TAG = "ConvertFragment"
 class ConvertFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     //a view's lifecycle in a fragment is different than the fragments lifecycle
@@ -74,7 +72,6 @@ class ConvertFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.editInputValue.requestFocusFromTouch()
 
         binding.editInputValue.setOnClickListener {
-            Log.d(TAG, "TOP START: ${binding.editInputValue.selectionStart}")
             convertViewModel.setCursorPos(binding.editInputValue.selectionStart)
         }
 
@@ -83,7 +80,6 @@ class ConvertFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spinTypeSelect.onItemSelectedListener = this
 
         initButtons()
-        Log.d(TAG, "onCreate ends")
         return binding.root
     }
 

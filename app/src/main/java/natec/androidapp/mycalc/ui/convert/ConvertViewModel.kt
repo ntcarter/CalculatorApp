@@ -1,13 +1,9 @@
 package natec.androidapp.mycalc.ui.convert
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import natec.androidapp.mycalc.insert
-import kotlin.math.log
-
-private const val TAG = "ConvertViewModel"
 
 class ConvertViewModel : ViewModel() {
 
@@ -80,7 +76,6 @@ class ConvertViewModel : ViewModel() {
                 hasDec = false
             }
 
-            Log.d(TAG, "cursorPosition: $cursorPosition")
             //delay liveData update to set cursor position
             val res = _topConvert.value!!.subSequence(0, cursorPosition - 1).toString() +
                     _topConvert.value!!.subSequence(cursorPosition, _topConvert.value!!.length).toString()

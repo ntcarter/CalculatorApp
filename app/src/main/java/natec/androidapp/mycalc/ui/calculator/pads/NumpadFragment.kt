@@ -1,29 +1,26 @@
 package natec.androidapp.mycalc.ui.calculator.pads
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import natec.androidapp.mycalc.databinding.FragmentNumpadBinding
 import natec.androidapp.mycalc.ui.calculator.viewmodel.CalculatorViewModel
 
-private const val TAG = "NumPadFragment"
 
 class NumpadFragment : Fragment() {
     private lateinit var binding: FragmentNumpadBinding
-    private lateinit var viewModel: CalculatorViewModel
+
+    //multiple fragments share the same instance of the calculatorViewModel
+    // so scope the viewModel to the activity hosting all of the fragments.
+    private val viewModel: CalculatorViewModel by viewModels({ requireActivity() })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentNumpadBinding.inflate(inflater, container, false)
-
-        //multiple fragments share the same instance of the calculatorViewModel
-        // so scope the viewModel to the activity hosting all of the fragments.
-        viewModel = ViewModelProvider(requireActivity()).get(CalculatorViewModel::class.java)
 
         //initialize calculator buttons
         initButtons()

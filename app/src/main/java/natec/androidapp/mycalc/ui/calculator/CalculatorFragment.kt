@@ -2,7 +2,6 @@ package natec.androidapp.mycalc.ui.calculator
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import natec.androidapp.mycalc.R
 import natec.androidapp.mycalc.databinding.FragmentCalculatorBinding
 import natec.androidapp.mycalc.ui.calculator.viewmodel.CalculatorViewModel
 
-private const val TAG = "CalculatorFragment"
 
 class CalculatorFragment : Fragment() {
 
@@ -59,7 +57,6 @@ class CalculatorFragment : Fragment() {
         //handles creating error toasts
         calculatorViewModel.toaster.observe(viewLifecycleOwner, {
             if(it != null) {
-                Log.d(TAG, "showing toast!")
                 Toast.makeText(
                     requireContext(),
                     calculatorViewModel.toaster.value,

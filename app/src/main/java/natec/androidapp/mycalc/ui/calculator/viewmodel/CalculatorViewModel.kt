@@ -17,7 +17,6 @@ import java.util.Stack
  * Uses the expression parsing library EvalEx by Udo Klimaschewski:
  * https://github.com/uklimaschewski/EvalEx
  */
-private const val TAG = "CalculatorViewModel"
 
 class CalculatorViewModel() : ViewModel() {
 
